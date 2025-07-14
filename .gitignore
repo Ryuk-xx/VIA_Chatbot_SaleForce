@@ -1,0 +1,10 @@
+# Bỏ qua folder test
+test/
+
+# Bỏ qua file test.ipynb ở thư mục gốc
+/test.ipynb
+
+# Bỏ qua thư mục venv (virtual environment)
+venv/
+
+logs/

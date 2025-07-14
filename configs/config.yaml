@@ -1,0 +1,183 @@
+# ======================= configs/config.yaml =======================
+# server configuration
+milvus:
+  milvus_uri: "tcp://localhost:19530"
+  product_collection_name: "SaleForce_product_vectorstore"
+  service_collection_name: "SaleForce_service_vectorstore"
+  top_k: 5
+  embedding_dimension: 1024
+  embedding_model: "text-embedding-3-small"
+
+# llm settings
+llm:
+  # model_name: "gpt-4.1-nano-2025-04-14"
+  model_4_1_mini: "gpt-4.1-mini-2025-04-14"
+  model_4_1: "gpt-4.1-2025-04-14"
+
+  temperature: 0.1
+  streaming: true
+  # openai_api_key:  ""
+
+path:
+  service_path: "data/data_service_29_2_2025.csv"
+  product_path: "data/data_products_29_2_2025.csv"
+
+
+logging:
+  log_file_path: "logs/Chatbot_SaleForce.log" 
+  level: "INFO"
+  
+elasticsearch:
+  # Open your browser at http://localhost:5601
+  # Elasticsearch API endpoint: http://localhost:9200
+  # API key: ekNtbXc1Y0JMaHhzdXhWdzR1R0E6WEtDYXlETHRFSTIyMHJWRDFpSVhVdw==
+   
+  Username: "elastic"
+  Password: "ZsR3uwZv"
+  host: "http://localhost:9200"
+
+product_fields:
+  - name: id
+    type: keyword
+
+  - name: name
+    type: text
+
+  - name: sku
+    type: keyword
+
+  - name: price
+    type: float
+
+  - name: thumbnail
+    type: keyword
+
+  - name: images
+    type: keyword
+
+  - name: category_id
+    type: keyword
+
+  - name: weight
+    type: float
+
+  - name: short_description
+    type: text
+
+  - name: description
+    type: text
+
+  - name: salient_features
+    type: text
+
+  - name: attributes
+    type: text
+
+  - name: length
+    type: float
+
+  - name: width
+    type: float
+
+  - name: height
+    type: float
+
+  - name: drying_washing_capacity
+    type: float
+
+  - name: volume
+    type: float
+
+  - name: power
+    type: float
+
+  - name: lighting_time
+    type: float
+
+  - name: charging_time
+    type: float
+
+  - name: battery_capacity_mAh
+    type: float
+
+  - name: battery_capacity_W
+    type: float
+
+  - name: solar_panel_power
+    type: float
+
+  - name: warranty
+    type: float
+
+  - name: dish_diameter
+    type: float
+
+  - name: min_operating_temperature
+    type: float
+
+  - name: max_operating_temperature
+    type: float
+
+  - name: water_resistance
+    type: integer
+
+  - name: shock_resistance
+    type: integer
+
+  - name: warranty_time
+    type: float
+
+
+
+
+
+service_fields:
+  - name: id
+    type: keyword
+
+  - name: code
+    type: keyword
+
+  - name: name
+    type: text
+
+  - name: description
+    type: text
+
+  - name: menu_code
+    type: keyword
+
+  - name: order
+    type: integer
+
+  - name: price
+    type: float
+
+  - name: status
+    type: boolean
+
+  - name: unit
+    type: keyword
+
+  - name: type
+    type: keyword
+
+  - name: value_type
+    type: keyword
+
+  - name: vat
+    type: integer
+
+  - name: image_url
+    type: keyword
+
+  - name: thumbnail_url
+    type: keyword
+
+  - name: created_at
+    type: date
+    format: "yyyy-MM-dd HH:mm:ss.SSS"
+
+  - name: updated_at
+    type: date
+    format: "yyyy-MM-dd HH:mm:ss.SSS"

@@ -1,0 +1,1364 @@
+app:
+  description: Trợ lý chatbot Người đồng hành
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: Chatbot  test
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.29@9e17ae8073fe53c282e9dc411e76a3cc52f8e794e4cc2499d204502086871c53
+kind: app
+version: 0.3.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - document
+      - image
+      - audio
+      - video
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: "<div style=\"text-align: center; padding: 20px; font-family:\
+      \ Arial, sans-serif;\">\n  <h2 style=\"font-size: 28px; color: #2c3e50;\">\U0001F6CD\
+      ️ <strong>Chào anh/chị!</strong></h2>\n  <p style=\"font-size: 20px; color:\
+      \ #34495e;\">\n    \U0001F916 Em là <strong>trợ lý ảo Dương</strong> đến từ\
+      \ \n    <a href=\"https://aoismart.vn\" target=\"_blank\" style=\"color: #2980b9;\
+      \ text-decoration: none;\"><em>Aoismart</em></a>, luôn sẵn sàng hỗ trợ anh/chị\
+      \ chọn mua sản phẩm phù hợp nhất!\n  </p>\n  <p style=\"font-size: 20px; color:\
+      \ #34495e;\">\n    \U0001F3AF Em có thể giới thiệu sản phẩm, tư vấn theo nhu\
+      \ cầu sử dụng, so sánh giữa các lựa chọn và hướng dẫn cách đặt hàng ạ.\n  </p>\n\
+      \  <p style=\"font-size: 20px; color: #e67e22;\">\n    ❓ <strong>Hôm nay anh/chị\
+      \ đang quan tâm đến sản phẩm gì để em hỗ trợ ngay nhé?</strong>\n  </p>\n</div>\n"
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: true
+    suggested_questions:
+    - Sản phẩm điều hòa giá tốt nhất
+    - Giới thiệu về đèn năng lượng mặt trời
+    - Các sản phẩm đồ gia dụng
+    - Bảo dưỡng máy giặt
+    suggested_questions_after_answer:
+      enabled: true
+    text_to_speech:
+      enabled: true
+      language: vi-VN
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: llm
+        targetType: answer
+      id: 1711528917469-1711528919501
+      selected: false
+      source: '1711528917469'
+      sourceHandle: source
+      target: '1711528919501'
+      targetHandle: target
+      type: custom
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1750388567119-1-1711528915811-target
+      selected: false
+      source: '1750388567119'
+      sourceHandle: '1'
+      target: '1711528915811'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1750388567119-1751441843226-1751441804083-target
+      source: '1750388567119'
+      sourceHandle: '1751441843226'
+      target: '1751441804083'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: http-request
+        targetType: code
+      id: 1751441804083-source-1751441997700-target
+      source: '1751441804083'
+      sourceHandle: source
+      target: '1751441997700'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1751441997700-source-1751442059253-target
+      source: '1751441997700'
+      sourceHandle: source
+      target: '1751442059253'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1751442059253-true-1751442117083-target
+      source: '1751442059253'
+      sourceHandle: 'true'
+      target: '1751442117083'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1751442117083-source-1751442552657-target
+      source: '1751442117083'
+      sourceHandle: source
+      target: '1751442552657'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17514422823900-source-1751442560789-target
+      source: '17514422823900'
+      sourceHandle: source
+      target: '1751442560789'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1711528915811-source-1711528917469-target
+      source: '1711528915811'
+      sourceHandle: source
+      target: '1711528917469'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 1751442059253-false-17514422823900-target
+      source: '1751442059253'
+      sourceHandle: 'false'
+      target: '17514422823900'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1711528914102-source-1752117156677-target
+      source: '1711528914102'
+      sourceHandle: source
+      target: '1752117156677'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: question-classifier
+      id: 1752117156677-source-1750388567119-target
+      source: '1752117156677'
+      sourceHandle: source
+      target: '1750388567119'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: llm
+      id: 1750388567119-1751426581390-1752232687478-target
+      selected: false
+      source: '1750388567119'
+      sourceHandle: '1751426581390'
+      target: '1752232687478'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1752232687478-source-1752232771993-target
+      source: '1752232687478'
+      sourceHandle: source
+      target: '1752232771993'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1750388567119-1752466670687-17524662667200-target
+      source: '1750388567119'
+      sourceHandle: '1752466670687'
+      target: '17524662667200'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17524662667200-source-17524749555520-target
+      source: '17524662667200'
+      sourceHandle: source
+      target: '17524749555520'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17524749555520-false-17514422823900-target
+      source: '17524749555520'
+      sourceHandle: 'false'
+      target: '17514422823900'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17524749555520-true-17524765005320-target
+      source: '17524749555520'
+      sourceHandle: 'true'
+      target: '17524765005320'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17524765005320-source-17524763177240-target
+      source: '17524765005320'
+      sourceHandle: source
+      target: '17524763177240'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables: []
+      height: 50
+      id: '1711528914102'
+      position:
+        x: -446.82438052123814
+        y: 118.8754112983066
+      positionAbsolute:
+        x: -446.82438052123814
+        y: 118.8754112983066
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - aE0ilN2VTBcUKRoJHFzyzSMKG3EPEMGDQFNRpo8QraIvFTRu2yCH6pok3Jepy5T3
+        desc: Cho phép bạn truy vấn nội dung văn bản liên quan đến câu hỏi của người
+          dùng từ Kiến thức
+        metadata_filtering_mode: disabled
+        metadata_model_config:
+          completion_params:
+            frequency_penalty: 0.3
+            presence_penalty: 0.2
+            temperature: 0.5
+            top_p: 0.85
+          mode: chat
+          name: gpt-4.1-mini-2025-04-14
+          provider: langgenius/openai/openai
+        multiple_retrieval_config:
+          reranking_enable: false
+          reranking_mode: reranking_model
+          reranking_model:
+            model: rerank-v3.5
+            provider: langgenius/cohere/cohere
+          score_threshold: 0.7
+          top_k: 5
+        query_variable_selector:
+        - '1752117156677'
+        - text
+        retrieval_mode: multiple
+        selected: false
+        single_retrieval_config:
+          model:
+            completion_params:
+              frequency_penalty: 0
+              max_tokens: 512
+              presence_penalty: 0
+              temperature: 0
+              top_p: 1
+            mode: chat
+            name: gpt-3.5-turbo
+            provider: openai
+        title: Knowledge Retrieval
+        type: knowledge-retrieval
+      dragging: false
+      height: 163
+      id: '1711528915811'
+      position:
+        x: 832.1046123270287
+        y: -9.72903285604238
+      positionAbsolute:
+        x: 832.1046123270287
+        y: -9.72903285604238
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1752117156677'
+          - text
+        desc: Gọi các mô hình ngôn ngữ lớn để trả lời các câu hỏi hoặc xử lý ngôn
+          ngữ tự nhiên
+        memory:
+          query_prompt_template: '{{#sys.query#}}{{#1752117156677.text#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 30
+        model:
+          completion_params:
+            frequency_penalty: 0.5
+            max_tokens: 14601
+            presence_penalty: 0.5
+            temperature: 0.2
+            top_p: 0.75
+          mode: chat
+          name: gpt-4.1-2025-04-14
+          provider: langgenius/openai/openai
+        prompt_config:
+          jinja2_variables:
+          - value_selector:
+            - '1750388567119'
+            - class_name
+            variable: class_name
+        prompt_template:
+        - edition_type: basic
+          id: 7fd82cf7-ea31-45c8-b9ac-3c711ee275a2
+          jinja2_text: ''
+          role: system
+          text: '# Định danh và vai trò:
+
+            - Bạn là Trợ lý chatbot chuyên tư vấn và giới thiệu các sản phẩm trên
+            trang web bán hàng **Aoismart**.
+
+            - Tên đầy đủ bạn: **Dương**
+
+            - Ngôn ngữ sử dụng: **Tiếng Việt** (văn nói, ngắn gọn, thân thiện)
+
+            - Xưng hô: Luôn xưng là “em” và gọi khách hàng là “anh/chị” để thể hiện
+            sự lễ phép, chuyên nghiệp.
+
+            - Giọng điệu: **Thân thiện – tự tin – chuyên nghiệp – gần gũi – hài hước
+            nhẹ nhàng**
+
+            - Mục tiêu: Hướng dẫn, gợi ý và giới thiệu sản phẩm phù hợp với nhu cầu
+            của khách hàng dựa trên thông tin có sẵn trên website Aoismart.
+
+
+
+            # Sử dụng ngữ cảnh sau đây làm kiến ​​thức đã học của bạn, bên trong thẻ
+            XML <context></context>.
+
+            <context>
+
+            {{#context#}}
+
+            </context>
+
+
+
+            # Nguyên tắc trả lời:
+
+            - Cấm bịa đặt nội dung không được cung cấp.
+
+            - Nếu em không biết, em sẽ nói rõ là chưa có thông tin ạ.
+
+            - Nếu chưa chắc chắn hoặc không có thông tin, em sẽ xin phép hỏi lại để
+            làm rõ nhu cầu.
+
+            - Không dùng từ ngữ khó hiểu hoặc lý thuyết hàn lâm.
+
+            - Không cung cấp thông tin sai, không rõ nguồn gốc từ hệ thống sản phẩm
+            Aoismart.
+
+            - Không đề cập đến chuyện lấy thông tin từ ngữ cảnh hay hệ thống phía
+            sau.
+
+
+
+            # Định dạng đầu ra:
+
+            - Trả lời bằng Markdown rõ ràng (ví dụ: dùng # cho tiêu đề, ** ** cho
+            in đậm).
+
+            - Sử dụng Emoji thân thiện và chuyên nghiệp tại các đầu mục, giữ nguyên
+            cấu trúc văn bản và cấu trúc hình ảnh trong bài viết.
+
+            - Giữ nguyên và hiển thị đầy đủ đường dẫn hình ảnh sản phẩm (không tự
+            bịa ảnh, chỉ lấy ảnh ở phần thumbnail nếu có) theo đúng cú pháp: ![](https://aoismart.....)
+
+            - Nếu như tạo bảng so sánh các sản phẩm thì không được đưa ảnh vào trong
+            bảng đó
+
+            - Không bao giờ đặt toàn bộ câu trả lời vào trong khối mã (```markdown
+            ... ```).'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        structured_output_enabled: false
+        title: LLM 1
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - sys
+            - files
+          enabled: true
+      height: 172
+      id: '1711528917469'
+      position:
+        x: 1372.995863171718
+        y: -9.72903285604238
+      positionAbsolute:
+        x: 1372.995863171718
+        y: -9.72903285604238
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1711528917469.text#}}
+
+          '
+        desc: ''
+        selected: false
+        title: Answer
+        type: answer
+        variables: []
+      height: 98
+      id: '1711528919501'
+      position:
+        x: 2389.2818044889814
+        y: 2.713739061688784
+      positionAbsolute:
+        x: 2389.2818044889814
+        y: 2.713739061688784
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        classes:
+        - id: '1'
+          name: 'Nếu câu hỏi chứa tham chiếu đến sản phẩm cụ thể như thông tin mô
+            tả, đánh giá chung, (ví dụ: tên model, tính năng, công dụng…) '
+        - id: '1751426581390'
+          name: Các câu chào hỏi, tâm sự, cảm ơn, tâm sự, hỏi về thông tin không liên
+            quan gì đến sản phẩm
+        - id: '1751441843226'
+          name: '- Nếu người dùng hỏi về việc so sánh hai hay nhiều sản phẩm, hoặc
+            tìm sản theo tiêu chí nào đó (ví dụ: giá < X, màu sắc, dung lượng trong
+            khoảng .. đến .., công suất lớn nhất, tốt, rẻ nhất, khoảng bao nhiêu,
+            khối lượng nhỏ, ..)
+
+            - Nếu người dùng hỏi về một số tiêu chí đặc trưng (ví dụ: chống nước,
+            chống va đập, ..)'
+        - id: '1752466670687'
+          name: '- Câu hỏi liên quan đến dịch vụ: sửa chữa, lắp đặt, nâng cấp, tháo
+            dỡ, bảo dưỡng, ..'
+        desc: ''
+        instruction: ''
+        instructions: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}'
+          window:
+            enabled: true
+            size: 5
+        model:
+          completion_params:
+            frequency_penalty: 0.5
+            presence_penalty: 0.5
+            temperature: 0.2
+            top_p: 0.75
+          mode: chat
+          name: gpt-4.1-mini-2025-04-14
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1752117156677'
+        - text
+        selected: false
+        title: Phân loại câu hỏi
+        topics: []
+        type: question-classifier
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - sys
+            - files
+          enabled: false
+      height: 545
+      id: '1750388567119'
+      position:
+        x: 149.07119202130787
+        y: -27.314930162323492
+      positionAbsolute:
+        x: 149.07119202130787
+        y: -27.314930162323492
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-875
+            key: ''
+            type: text
+            value: '{"query": "{{#1752117156677.text#}}"}'
+          type: json
+        desc: Lấy dữ liệu từ sql query
+        headers: 'accept:application/json
+
+          Content-Type:application/json'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: SQL_PRODUCT
+        type: http-request
+        url: http://10.33.88.150:8004/sql_retrieval
+        variables: []
+      height: 161
+      id: '1751441804083'
+      position:
+        x: 890.471641531916
+        y: 673.3758019797461
+      positionAbsolute:
+        x: 890.471641531916
+        y: 673.3758019797461
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "def main(body: str) -> dict:\n    import json\n\n    body = json.loads(body)\n\
+          \    return {\n        \"results\": body.get(\"results\"),\n        \"sql_query\"\
+          : body.get(\"sql_query\"),\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          results:
+            children: null
+            type: string
+          sql_query:
+            children: null
+            type: string
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: sql_result
+        type: code
+        variables:
+        - value_selector:
+          - '1751441804083'
+          - body
+          variable: body
+      height: 79
+      id: '1751441997700'
+      position:
+        x: 1225.8881215900594
+        y: 673.3758019797461
+      positionAbsolute:
+        x: 1225.8881215900594
+        y: 673.3758019797461
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: <
+            id: 16ba0dc0-cc0e-4f2c-bf5c-4ee489ed3259
+            value: '300'
+            varType: number
+            variable_selector:
+            - '1751441804083'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: NẾU/NGƯỢC LẠI
+        type: if-else
+      height: 118
+      id: '1751442059253'
+      position:
+        x: 1552.2096970392697
+        y: 673.3758019797461
+      positionAbsolute:
+        x: 1552.2096970392697
+        y: 673.3758019797461
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1751441997700'
+          - sql_query
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}} {{#1752117156677.text#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 30
+        model:
+          completion_params:
+            frequency_penalty: 0.5
+            presence_penalty: 0.5
+            temperature: 0.2
+            top_p: 0.75
+          mode: chat
+          name: gpt-4.1-2025-04-14
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 09ab584c-c28a-4834-a84d-75ccdc57449f
+          role: system
+          text: "\"\"\"\n# Định danh và vai trò:\n# Vai trò & định danh:\nBạn là Trợ\
+            \ lý tư vấn mua sắm thông minh tại website thương mại điện tử **AIO Smart**\
+            \ – nền tảng chuyên cung cấp các thiết bị điện tử, đồ gia dụng, thiết\
+            \ bị năng lượng mặt trời,... do Tổng công ty Cổ phần Công trình Viettel\
+            \ VCC phân phối.\n\n\n## Tên trợ lý: **Dương**\n- Ngôn ngữ: **Tiếng Việt**\
+            \ (giọng văn ngắn gọn, tự nhiên, dễ hiểu)\n- Xưng hô: **xưng \"em\", gọi\
+            \ khách là \"anh/chị\"**\n- Giọng điệu: **thân thiện – chuyên nghiệp –\
+            \ tự tin – hài hước**\n- Phong cách trả lời: giống như một **nhân viên\
+            \ bán hàng hiểu sản phẩm tận răng**\n- Mục tiêu: Giới thiệu, so sánh,\
+            \ phân tích ưu điểm sản phẩm và giúp anh/chị chọn được món hàng phù hợp\
+            \ nhất theo nhu cầu.\n\n\n# Dữ liệu truy vấn (context):\n- {{#1751441997700.results#}}\n\
+            \n# CÂU HỎI NGƯỜI DÙNG:\n- {{#sys.query#}}\n\n\n# NGUYÊN TẮC TRẢ LỜI:\n\
+            - Kiến thức về sản phẩm dựa trên ngữ cảnh được cung cấp\n- Không tự bịa\
+            \ hoặc suy diễn nếu không có dữ liệu.\n- Nếu không chắc chắn, hãy hỏi\
+            \ lại người dùng cụ thể về sản phẩm họ cần\n- Nếu sản phẩm người dùng\
+            \ hỏi không tồn tại trong dữ liệu được cung cấp, hãy giải thích cho họ\
+            \ sản phẩm hiện chưa được bán ở website và hướng họ sang các thiết bị\
+            \ thiết bị điện tử, đồ gia dụng, thiết bị năng lượng mặt trời.\n- Luôn\
+            \ trung thực và thân thiện như một nhân viên bán hàng uy tín.\n\n\n# CẤU\
+            \ TRÚC OUTPUT:\n- **Luôn trả lời bằng định dạng markdown** dễ đọc trên\
+            \ web.\n- **Link web và đường dẫn giữ nguyên định dạng đầy đủ, không mã\
+            \ hóa.**\n- Nếu có thể, hãy trình bày dạng bảng hoặc danh sách gạch đầu\
+            \ dòng cho trực quan.\n- Giữ nguyên và hiển thị đầy đủ đường dẫn hình\
+            \ ảnh sản phẩm (chỉ ảnh thumbnail nếu có) theo đúng cú pháp: ![](https://aoismart.vn/media/images/...)\
+            \ \n- Nếu tạo bảng so sánh thì không cần phải đưa ảnh vào trong bảng đó\n\
+            - Kết thúc bằng một gợi ý hoặc lời mời gọi thân thiện (call-to-action).\n\
+            \n\n\n# YÊU CẦU:\n- Trả lời đúng trọng tâm câu hỏi, không lan man.\n-\
+            \ Nếu sản phẩm có giá: ghi rõ đơn vị là **VND**, làm tròn đơn vị hợp lý\
+            \ để dễ nhìn.\n- Nếu có thông số kỹ thuật hoặc đặc điểm nổi bật: hãy gạch\
+            \ đầu dòng để người dùng dễ theo dõi.\n- Có thể **so sánh, gợi ý, hoặc\
+            \ tư vấn lựa chọn** nếu có nhiều sản phẩm được cung cấp.\n- Nếu không\
+            \ đủ dữ liệu: nói rõ điều đó và đề xuất hướng trả lời khác hoặc sản phẩm\
+            \ thay thế.\n\n\n# MỤC TIÊU CUỐI CÙNG:\nTrả lời thật súc tích – rõ ràng\
+            \ – có giá trị, **giống như một nhân viên tư vấn sản phẩm chính hiệu**,\
+            \ giúp anh/chị dễ dàng đưa ra quyết định mua sắm.\n\"\"\"\n\n"
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: LLM 2
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - sys
+            - files
+          enabled: true
+      height: 113
+      id: '1751442117083'
+      position:
+        x: 2024.5984054163248
+        y: 564.3283254325656
+      positionAbsolute:
+        x: 2024.5984054163248
+        y: 564.3283254325656
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}} {{#1752117156677.text#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 30
+        model:
+          completion_params:
+            frequency_penalty: 0.5
+            presence_penalty: 0.5
+            temperature: 0.2
+            top_p: 0.75
+          mode: chat
+          name: gpt-4.1-2025-04-14
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 09ab584c-c28a-4834-a84d-75ccdc57449f
+          role: system
+          text: '# Định danh và vai trò:
+
+            Bạn là Trợ lý tư vấn mua sắm thông minh tại website thương mại điện tử
+            **AIO Smart** – nền tảng chuyên cung cấp các thiết bị điện tử, đồ gia
+            dụng, thiết bị năng lượng mặt trời,... do Tổng công ty Cổ phần Công trình
+            Viettel VCC phân phối.
+
+
+
+            Tên đầy đủ bạn: Dương
+
+            Ngôn ngữ sử dụng: Tiếng Việt (văn nói, ngắn gọn, thân thiện)
+
+            Xưng hô: Luôn xưng là “em” và dự đoán khách hàng là anh/chị để giao tiếp
+            lễ phép, thân thiện.
+
+            Giọng điệu: Thân thiện – chuyên nghiệp – tự tin – hài hước – giống như
+            một trợ lý thực thụ
+
+            Mục tiêu: Hướng dẫn và trả lời về nội dung có trong các bài viết trên
+            trang web Người Đồng hành của công ty
+
+            Cách viết: Sử dụng Emoji thân thiện và chuyên nghiệp tại các đầu mục,
+            giữ nguyên cấu trúc văn bản và cấu trúc hình ảnh trong bài viết.
+
+
+
+            Câu hỏi anh/chị vừa đặt là: {{#sys.query#}}
+
+
+
+                📌 Tuy nhiên, em ** không có thông tin** trong cơ sở dữ liệu để trả
+            lời chính xác câu hỏi của anh/chị.
+
+
+
+                Anh/chị thử đặt lại câu hỏi khác nhé, em luôn sẵn sàng hỗ trợ ạ! 😊'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: LLM 3
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - sys
+            - files
+          enabled: true
+      height: 113
+      id: '17514422823900'
+      position:
+        x: 2024.5984054163248
+        y: 760.5514661566949
+      positionAbsolute:
+        x: 2024.5984054163248
+        y: 760.5514661566949
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1751442117083.text#}}'
+        desc: ''
+        selected: false
+        title: Trả lời 2
+        type: answer
+        variables: []
+      height: 98
+      id: '1751442552657'
+      position:
+        x: 2389.2818044889814
+        y: 564.3283254325656
+      positionAbsolute:
+        x: 2389.2818044889814
+        y: 564.3283254325656
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17514422823900.text#}}'
+        desc: ''
+        selected: false
+        title: Trả lời 3
+        type: answer
+        variables: []
+      height: 98
+      id: '1751442560789'
+      position:
+        x: 2389.2818044889814
+        y: 760.5514661566949
+      positionAbsolute:
+        x: 2389.2818044889814
+        y: 760.5514661566949
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - sys
+          - query
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 30
+        model:
+          completion_params:
+            temperature: 0.2
+          mode: chat
+          name: gpt-4.1-2025-04-14
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 1f79db73-cf76-4e34-9a81-cc2ed19a4822
+          role: system
+          text: "# Vai trò \nBạn là một chuyên gia viết lại yêu cầu (Query Rewriter)\
+            \ của Tổng công ty Cổ phần Công trình Viettel (VCC).\n\n\n- **Nhiệm vụ\
+            \ duy nhất của bạn là viết lại CÂU HỎI hoặc YÊU CẦU ĐẦU VÀO**, sao cho\
+            \ rõ ràng, đầy đủ ngữ cảnh hơn để phục vụ truy vấn trong **vector database**\
+            \ hoặc **SQL database**. \n- **Bạn KHÔNG PHẢI là chatbot. KHÔNG TRẢ LỜI\
+            \ người dùng.**\n\n\n# Nguyên tắc xử lý yêu cầu:\n## 1. Tận dụng ngữ cảnh\
+            \ hội thoại (Contextual Expansion)\n- Nếu lịch sử trò chuyện gần nhất\
+            \ có liên quan đến câu đầu vào, hãy sử dụng thông tin đó để viết lại câu\
+            \ rõ ràng, cụ thể hơn.\n- Nếu câu đầu vào mang tính tiếp nối như: “thế\
+            \ còn…”, “vậy… thì sao?”, “loại khác?”, “còn dòng kia?”, “giá bao nhiêu?”,…\
+            \ thì cần suy diễn ngữ cảnh gần nhất để hoàn chỉnh lại câu hỏi.\n- Luôn\
+            \ đảm bảo câu viết lại có thể đứng độc lập, không cần phụ thuộc vào ngữ\
+            \ cảnh nhưng vẫn giữ nguyên ý định gốc.\n\n\n\n Ví dụ:\n - User: \"Sản\
+            \ phẩm điều hòa giá tốt\" → Bot: \"Bên em chưa kinh doanh điều hòa....\"\
+            ,  \n   User: \"vậy đèn nlmt thì sao\" -> Rewrite: \"Tìm các sản phẩm\
+            \ đèn năng lượng mặt trời có giá tốt của bên em\"\n - User: \"Có iPhone\
+            \ không?\", \"còn Samsung?\" -> Rewrite: \"Bên em hiện có các dòng điện\
+            \ thoại Samsung nào không ạ?\"\n\n\n\n## 2. Xử lý yêu cầu ngắn gọn / mơ\
+            \ hồ (Short or Ambiguous Queries)\n- Nếu câu đầu vào quá ngắn, thiếu chủ\
+            \ ngữ, thiếu ngữ nghĩa rõ ràng, hãy dùng ngữ cảnh gần nhất để bổ sung\
+            \ đầy đủ thông tin.\n- Có thể thêm cụm như: “các sản phẩm…”, “bên em có…\
+            \ không?”, “giá của… là bao nhiêu?”, nếu phù hợp với cách nói tự nhiên.\n\
+            - Tuyệt đối không suy diễn sai ý người dùng, chỉ mở rộng để làm rõ nghĩa.\n\
+             Ví dụ:\n - User: \"Đèn có chống nước không?\", \"loại khác thì sao?\"\
+            \ -> Rewrite: \"Các mẫu đèn khác bên em có chống nước không ạ?\"\n - User:\
+            \ \"Camera giám sát ngoài trời\",  \"giá bao nhiêu\" -> Rewrite: \"Giá\
+            \ của các dòng camera giám sát ngoài trời bên em là bao nhiêu ạ?\"\n\n\
+            \n## TUYỆT ĐỐI CẤM:\n- **Không được trả lời câu hỏi, yêu cầu hoặc câu\
+            \ lệnh gốc..**\n- **Không được thêm câu trả lời như: “bên em là…”, “dạ…”,\
+            \ “sản phẩm là…”.**\n- **Không được đóng vai chatbot.**\n- **Chỉ viết\
+            \ lại đúng truy vấn – đúng cú pháp câu hỏi hoặc câu lệnh gốc**.\n\n##\
+            \ 3. Trường hợp không cần viết lại đầu vào:\n- Nếu câu đầu vào đã đủ rõ\
+            \ ràng, chi tiết, và không cần ngữ cảnh để hiểu, hãy giữ nguyên y chang.\n\
+            - Nếu câu đầu vào KHÔNG phải là một yêu cầu hoặc câu hỏi, ví dụ:\n   \
+            \ Lời chào: “xin chào”, “hello”\n    Cảm ơn: “cảm ơn bạn”, “ok”\n    Tâm\
+            \ sự hoặc thông tin: “tôi tên là Nam”, “hôm nay trời đẹp quá”\n  ->  Thì\
+            \ KHÔNG viết lại gì cả, chỉ trả về đúng câu gốc đó.\n\n## 4. Câu đầu vào:\n\
+            {{#context#}}\n\n# ĐẦU RA BẮT BUỘC:\n- Nếu viết lại câu đầu vào, chỉ trả\
+            \ về DUY NHẤT câu đã viết lại – không kèm lời giải thích, lời chào hay\
+            \ nội dung trả lời.\n- KHÔNG đóng vai chatbot, KHÔNG đưa ra câu trả lời\
+            \ cho yêu cầu.\n- Nếu không cần viết lại, chỉ trả về nguyên văn câu gốc,\
+            \ không thêm bất kỳ chữ nào khác.\n\n# Mục tiêu: Tạo truy vấn rõ ràng\
+            \ – giàu ngữ cảnh – đúng ý định người dùng – phù hợp để tìm kiếm trong\
+            \ vector database."
+        selected: false
+        structured_output_enabled: false
+        title: Rewriter
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 84
+      id: '1752117156677'
+      position:
+        x: -165.84367600855745
+        y: 81.39957680610289
+      positionAbsolute:
+        x: -165.84367600855745
+        y: 81.39957680610289
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4.1-nano
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 695722f8-be49-4bd0-ae00-ccf6454d0eeb
+          role: system
+          text: '# Định danh và vai trò:
+
+            - Bạn là **Trợ lý chatbot tên Dương** của website bán hàng **Aoismart.**
+
+            - Ngôn ngữ sử dụng: **Tiếng Việt** (văn nói, ngắn gọn, thân thiện)
+
+            - Nhiệm vụ của bạn là **trò chuyện thân thiện, trả lời chào hỏi, giới
+            thiệu về Aoismart** và giao tiếp một cách gần gũi, chuyên nghiệp với khách
+            hàng.
+
+            - Luôn xưng là **“em”**, gọi khách là **“anh/chị”** tùy theo ngữ cảnh,
+            để thể hiện sự tôn trọng và thân mật.
+
+
+            # Phạm vi xử lý:
+
+            Trả lời các câu hỏi **chào hỏi, giới thiệu bản thân, giới thiệu website
+            Aoismart, trò chuyện vui vẻ, hỏi thăm thông thường**.
+
+            Không trả lời các nội dung chuyên sâu về sản phẩm (trường hợp đó sẽ được
+            xử lý bởi prompt riêng).
+
+
+            # Nguyên tắc trả lời:
+
+            - Thân thiện, tự nhiên như một nhân viên đang chat trực tiếp với khách.
+
+            - Sử dụng **văn nói, ngắn gọn, có cảm xúc nhẹ, giọng văn vui vẻ – dễ gần
+            – chuyên nghiệp.**
+
+            - Nếu không liên quan đến sản phẩm, em vẫn **trò chuyện bình thường**
+            với anh/chị theo cách gần gũi, đúng vai trò là người đại diện của Aoismart.
+
+            - Không bịa đặt thông tin, không trả lời những nội dung ngoài phạm vi
+            website nếu không chắc chắn.
+
+            - Có thể dùng emoji thân thiện như 😊, 🙌, 👍 để tăng tính gần gũi.
+
+            - Ưu tiên phản hồi nhanh, gãy gọn, không lan man dài dòng.
+
+
+            # Định dạng đầu ra:
+
+            - Trả lời bằng Markdown rõ ràng, ngắn gọn.
+
+            - Tránh dùng khối mã hoặc trả lời như đang gõ lập trình.'
+        selected: false
+        title: LLM chào hỏi
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 84
+      id: '1752232687478'
+      position:
+        x: 1372.995863171718
+        y: 300.45029035834494
+      positionAbsolute:
+        x: 1372.995863171718
+        y: 300.45029035834494
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1752232687478.text#}}'
+        desc: ''
+        selected: false
+        title: Answer 4
+        type: answer
+        variables: []
+      height: 98
+      id: '1752232771993'
+      position:
+        x: 2391.3315395768523
+        y: 290.55079525521364
+      positionAbsolute:
+        x: 2391.3315395768523
+        y: 290.55079525521364
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-875
+            key: ''
+            type: text
+            value: "{\n  \"query\": \"{{#1752117156677.text#}}\",\n  \"retrieval_setting\"\
+              : {\n    \"top_k\": 5,\n    \"score_threshold\": 0.5      \n  }\n}"
+          type: json
+        desc: Lấy dữ liệu từ sql query
+        headers: 'accept:application/json
+
+          Content-Type:application/json'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: VECTOR_SERVICE
+        type: http-request
+        url: http://172.101.108.69:8004/service_vector_retrieval
+        variables: []
+      height: 177
+      id: '17524662667200'
+      position:
+        x: 840.6869376239158
+        y: -318.4606522488938
+      positionAbsolute:
+        x: 840.6869376239158
+        y: -318.4606522488938
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: <
+            id: 9c5ac480-d7b2-4fd1-92eb-c3b81a90102f
+            value: '300'
+            varType: number
+            variable_selector:
+            - '17524662667200'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: NẾU/NGƯỢC LẠI (1)
+        type: if-else
+      height: 118
+      id: '17524749555520'
+      position:
+        x: 1552.2096970392697
+        y: -312.46065319087097
+      positionAbsolute:
+        x: 1552.2096970392697
+        y: -312.46065319087097
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#17524765005320.text#}}'
+        desc: ''
+        selected: false
+        title: VECTOR_SERVICE_ANSWER
+        type: answer
+        variables: []
+      height: 98
+      id: '17524763177240'
+      position:
+        x: 2389.2818044889814
+        y: -312.46065319087097
+      positionAbsolute:
+        x: 2389.2818044889814
+        y: -312.46065319087097
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}} {{#1752117156677.text#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 30
+        model:
+          completion_params:
+            frequency_penalty: 0.5
+            presence_penalty: 0.5
+            temperature: 0.2
+            top_p: 0.75
+          mode: chat
+          name: gpt-4.1-2025-04-14
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 09ab584c-c28a-4834-a84d-75ccdc57449f
+          role: system
+          text: '# Định danh và vai trò:
+
+            Bạn là Trợ lý chăm sóc khách hàng thông minh của **AIO Smart** – nền tảng
+            chuyên cung cấp **thiết bị điện tử, đồ gia dụng, thiết bị năng lượng mặt
+            trời** do **Tổng công ty Cổ phần Công trình Viettel VCC** phân phối.
+
+
+
+            ## Tên trợ lý: **Dương**
+
+            - Ngôn ngữ: **Tiếng Việt** (giọng văn ngắn gọn, tự nhiên, dễ hiểu)
+
+            - Xưng hô: **xưng "em", gọi khách là "anh/chị"**
+
+            - Giọng điệu: **thân thiện – chuyên nghiệp – tự tin – hài hước khi phù
+            hợp**
+
+            - Phong cách trả lời: như **nhân viên chăm sóc khách hàng tận tâm**
+
+            - Mục tiêu: Giải đáp chính xác các thắc mắc liên quan đến **dịch vụ sau
+            bán hàng** (bảo hành, lắp đặt, sửa chữa, bảo trì, tháo dỡ, vận chuyển,...)
+            và **hướng dẫn khách xử lý nhanh – gọn – hiệu quả**.
+
+
+
+            # Dữ liệu truy vấn (context):
+
+            - {{#17524662667200.body#}} (dữ liệu về dịch vụ, chính sách, thời gian,
+            khu vực áp dụng, yêu cầu kỹ thuật, hotline, v.v.)
+
+
+            # CÂU HỎI NGƯỜI DÙNG:
+
+            - {{#sys.query#}}
+
+
+
+            # NGUYÊN TẮC TRẢ LỜI:
+
+            - **Chỉ dựa trên thông tin có trong ngữ cảnh** được cung cấp.
+
+            - **Không bịa đặt** nếu không có dữ liệu – hãy giải thích trung thực và
+            hỏi rõ thêm nếu cần.
+
+            - **Luôn thể hiện sự tận tình**, hướng dẫn chi tiết và dễ hiểu như một
+            nhân viên hỗ trợ thực thụ.
+
+            - Nếu có những dịch vụ phù hợp, hãy cho biết cụ thể tên mã dịch vụ đó
+            (code)
+
+            - Nếu dịch vụ chưa áp dụng ở khu vực, chưa có chính sách tương ứng hoặc
+            chưa hỗ trợ loại thiết bị đó, hãy giải thích lý do rõ ràng và đề xuất
+            hướng xử lý khác (ví dụ: gọi hotline, gửi yêu cầu online, v.v.)
+
+            - Nếu dịch vụ có điều kiện hoặc chi phí phát sinh, hãy nêu rõ.
+
+            - Thêm các icon (tránh lạm dụng) để cuộc trò chuyện thêm thú vị và tự
+            nhiên.
+
+
+            # CẤU TRÚC OUTPUT:
+
+            - **Trả lời bằng định dạng markdown** để hiển thị rõ ràng trên giao diện
+            web.
+
+            - **Trình bày dưới dạng danh sách gạch đầu dòng hoặc bảng** nếu có nhiều
+            thông tin (giá, thời gian, phạm vi, yêu cầu,...)
+
+            - Nếu có link tra cứu, biểu mẫu, hotline hoặc tài liệu hướng dẫn, hãy
+            **hiển thị link đầy đủ** (không mã hóa).
+
+            - Không cần hiển thị ảnh hay đường dẫn ảnh minh họa
+
+
+
+            # YÊU CẦU:
+
+            - Trả lời **ngắn gọn – đúng trọng tâm – dễ hiểu**
+
+            - Luôn **gọi đúng tên dịch vụ**, phân biệt rõ: _bảo hành_ ≠ _bảo trì_
+            ≠ _lắp đặt_.
+
+            - Nếu liên quan đến thời gian, chi phí, khu vực áp dụng – hãy nêu rõ để
+            khách hàng dễ chuẩn bị.
+
+            - Nếu dịch vụ cần liên hệ thêm: **hướng dẫn khách hàng bước tiếp theo**
+            (gọi hotline, gửi yêu cầu qua link, đến trung tâm,...)
+
+
+
+
+            # MỤC TIÊU CUỐI CÙNG:
+
+            Hỗ trợ khách **hiểu rõ quy trình dịch vụ, yên tâm xử lý**, giống như một
+            nhân viên chăm sóc khách hàng tận tâm từ AIO Smart.  
+
+            Kết thúc bằng một **lời nhắc thân thiện** hoặc **gợi ý hành động cụ thể**
+            để khách không bỏ sót bước nào.
+
+
+            Ví dụ lời kết gợi ý:
+
+            - “Nếu cần em hỗ trợ gửi phiếu bảo hành online, anh/chị cứ báo để em làm
+            giúp nhé!”'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: LLM_VECTOR_SERVICE
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - sys
+            - files
+          enabled: true
+      height: 113
+      id: '17524765005320'
+      position:
+        x: 2024.5984054163248
+        y: -312.46065319087097
+      positionAbsolute:
+        x: 2024.5984054163248
+        y: -312.46065319087097
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -257.4114010375838
+      y: 84.79722928198646
+      zoom: 0.5000000784981097

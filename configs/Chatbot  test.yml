@@ -78,32 +78,11 @@ workflow:
   graph:
     edges:
     - data:
-        sourceType: llm
-        targetType: answer
-      id: 1711528917469-1711528919501
-      selected: false
-      source: '1711528917469'
-      sourceHandle: source
-      target: '1711528919501'
-      targetHandle: target
-      type: custom
-    - data:
-        isInLoop: false
-        sourceType: question-classifier
-        targetType: knowledge-retrieval
-      id: 1750388567119-1-1711528915811-target
-      selected: false
-      source: '1750388567119'
-      sourceHandle: '1'
-      target: '1711528915811'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
         isInLoop: false
         sourceType: question-classifier
         targetType: http-request
       id: 1750388567119-1751441843226-1751441804083-target
+      selected: false
       source: '1750388567119'
       sourceHandle: '1751441843226'
       target: '1751441804083'
@@ -116,6 +95,7 @@ workflow:
         sourceType: http-request
         targetType: code
       id: 1751441804083-source-1751441997700-target
+      selected: false
       source: '1751441804083'
       sourceHandle: source
       target: '1751441997700'
@@ -128,6 +108,7 @@ workflow:
         sourceType: code
         targetType: if-else
       id: 1751441997700-source-1751442059253-target
+      selected: false
       source: '1751441997700'
       sourceHandle: source
       target: '1751442059253'
@@ -140,6 +121,7 @@ workflow:
         sourceType: if-else
         targetType: llm
       id: 1751442059253-true-1751442117083-target
+      selected: false
       source: '1751442059253'
       sourceHandle: 'true'
       target: '1751442117083'
@@ -152,6 +134,7 @@ workflow:
         sourceType: llm
         targetType: answer
       id: 1751442117083-source-1751442552657-target
+      selected: false
       source: '1751442117083'
       sourceHandle: source
       target: '1751442552657'
@@ -164,6 +147,7 @@ workflow:
         sourceType: llm
         targetType: answer
       id: 17514422823900-source-1751442560789-target
+      selected: false
       source: '17514422823900'
       sourceHandle: source
       target: '1751442560789'
@@ -172,20 +156,10 @@ workflow:
       zIndex: 0
     - data:
         isInLoop: false
-        sourceType: knowledge-retrieval
-        targetType: llm
-      id: 1711528915811-source-1711528917469-target
-      source: '1711528915811'
-      sourceHandle: source
-      target: '1711528917469'
-      targetHandle: target
-      type: custom
-      zIndex: 0
-    - data:
-        isInLoop: false
         sourceType: if-else
         targetType: llm
       id: 1751442059253-false-17514422823900-target
+      selected: false
       source: '1751442059253'
       sourceHandle: 'false'
       target: '17514422823900'
@@ -197,6 +171,7 @@ workflow:
         sourceType: start
         targetType: llm
       id: 1711528914102-source-1752117156677-target
+      selected: false
       source: '1711528914102'
       sourceHandle: source
       target: '1752117156677'
@@ -208,6 +183,7 @@ workflow:
         sourceType: llm
         targetType: question-classifier
       id: 1752117156677-source-1750388567119-target
+      selected: false
       source: '1752117156677'
       sourceHandle: source
       target: '1750388567119'
@@ -231,6 +207,7 @@ workflow:
         sourceType: llm
         targetType: answer
       id: 1752232687478-source-1752232771993-target
+      selected: false
       source: '1752232687478'
       sourceHandle: source
       target: '1752232771993'
@@ -242,6 +219,7 @@ workflow:
         sourceType: question-classifier
         targetType: http-request
       id: 1750388567119-1752466670687-17524662667200-target
+      selected: false
       source: '1750388567119'
       sourceHandle: '1752466670687'
       target: '17524662667200'
@@ -253,6 +231,7 @@ workflow:
         sourceType: http-request
         targetType: if-else
       id: 17524662667200-source-17524749555520-target
+      selected: false
       source: '17524662667200'
       sourceHandle: source
       target: '17524749555520'
@@ -264,6 +243,7 @@ workflow:
         sourceType: if-else
         targetType: llm
       id: 17524749555520-false-17514422823900-target
+      selected: false
       source: '17524749555520'
       sourceHandle: 'false'
       target: '17514422823900'
@@ -275,6 +255,7 @@ workflow:
         sourceType: if-else
         targetType: llm
       id: 17524749555520-true-17524765005320-target
+      selected: false
       source: '17524749555520'
       sourceHandle: 'true'
       target: '17524765005320'
@@ -286,9 +267,69 @@ workflow:
         sourceType: llm
         targetType: answer
       id: 17524765005320-source-17524763177240-target
+      selected: false
       source: '17524765005320'
       sourceHandle: source
       target: '17524763177240'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: http-request
+      id: 1750388567119-1-17525427107910-target
+      selected: false
+      source: '1750388567119'
+      sourceHandle: '1'
+      target: '17525427107910'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: http-request
+        targetType: if-else
+      id: 17525427107910-source-17525430464920-target
+      selected: false
+      source: '17525427107910'
+      sourceHandle: source
+      target: '17525430464920'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17525430464920-false-17514422823900-target
+      selected: false
+      source: '17525430464920'
+      sourceHandle: 'false'
+      target: '17514422823900'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: if-else
+        targetType: llm
+      id: 17525430464920-true-17525431404560-target
+      selected: false
+      source: '17525430464920'
+      sourceHandle: 'true'
+      target: '17525431404560'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 17525431404560-source-1711528919501-target
+      source: '17525431404560'
+      sourceHandle: source
+      target: '1711528919501'
       targetHandle: target
       type: custom
       zIndex: 0
@@ -302,205 +343,18 @@ workflow:
       height: 50
       id: '1711528914102'
       position:
-        x: -446.82438052123814
-        y: 118.8754112983066
+        x: -593.9025390539266
+        y: 275.3266652799392
       positionAbsolute:
-        x: -446.82438052123814
-        y: 118.8754112983066
+        x: -593.9025390539266
+        y: 275.3266652799392
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     - data:
-        dataset_ids:
-        - aE0ilN2VTBcUKRoJHFzyzSMKG3EPEMGDQFNRpo8QraIvFTRu2yCH6pok3Jepy5T3
-        desc: Cho phép bạn truy vấn nội dung văn bản liên quan đến câu hỏi của người
-          dùng từ Kiến thức
-        metadata_filtering_mode: disabled
-        metadata_model_config:
-          completion_params:
-            frequency_penalty: 0.3
-            presence_penalty: 0.2
-            temperature: 0.5
-            top_p: 0.85
-          mode: chat
-          name: gpt-4.1-mini-2025-04-14
-          provider: langgenius/openai/openai
-        multiple_retrieval_config:
-          reranking_enable: false
-          reranking_mode: reranking_model
-          reranking_model:
-            model: rerank-v3.5
-            provider: langgenius/cohere/cohere
-          score_threshold: 0.7
-          top_k: 5
-        query_variable_selector:
-        - '1752117156677'
-        - text
-        retrieval_mode: multiple
-        selected: false
-        single_retrieval_config:
-          model:
-            completion_params:
-              frequency_penalty: 0
-              max_tokens: 512
-              presence_penalty: 0
-              temperature: 0
-              top_p: 1
-            mode: chat
-            name: gpt-3.5-turbo
-            provider: openai
-        title: Knowledge Retrieval
-        type: knowledge-retrieval
-      dragging: false
-      height: 163
-      id: '1711528915811'
-      position:
-        x: 832.1046123270287
-        y: -9.72903285604238
-      positionAbsolute:
-        x: 832.1046123270287
-        y: -9.72903285604238
-      selected: false
-      sourcePosition: right
-      targetPosition: left
-      type: custom
-      width: 244
-    - data:
-        context:
-          enabled: true
-          variable_selector:
-          - '1752117156677'
-          - text
-        desc: Gọi các mô hình ngôn ngữ lớn để trả lời các câu hỏi hoặc xử lý ngôn
-          ngữ tự nhiên
-        memory:
-          query_prompt_template: '{{#sys.query#}}{{#1752117156677.text#}}'
-          role_prefix:
-            assistant: ''
-            user: ''
-          window:
-            enabled: true
-            size: 30
-        model:
-          completion_params:
-            frequency_penalty: 0.5
-            max_tokens: 14601
-            presence_penalty: 0.5
-            temperature: 0.2
-            top_p: 0.75
-          mode: chat
-          name: gpt-4.1-2025-04-14
-          provider: langgenius/openai/openai
-        prompt_config:
-          jinja2_variables:
-          - value_selector:
-            - '1750388567119'
-            - class_name
-            variable: class_name
-        prompt_template:
-        - edition_type: basic
-          id: 7fd82cf7-ea31-45c8-b9ac-3c711ee275a2
-          jinja2_text: ''
-          role: system
-          text: '# Định danh và vai trò:
-
-            - Bạn là Trợ lý chatbot chuyên tư vấn và giới thiệu các sản phẩm trên
-            trang web bán hàng **Aoismart**.
-
-            - Tên đầy đủ bạn: **Dương**
-
-            - Ngôn ngữ sử dụng: **Tiếng Việt** (văn nói, ngắn gọn, thân thiện)
-
-            - Xưng hô: Luôn xưng là “em” và gọi khách hàng là “anh/chị” để thể hiện
-            sự lễ phép, chuyên nghiệp.
-
-            - Giọng điệu: **Thân thiện – tự tin – chuyên nghiệp – gần gũi – hài hước
-            nhẹ nhàng**
-
-            - Mục tiêu: Hướng dẫn, gợi ý và giới thiệu sản phẩm phù hợp với nhu cầu
-            của khách hàng dựa trên thông tin có sẵn trên website Aoismart.
-
-
-
-            # Sử dụng ngữ cảnh sau đây làm kiến ​​thức đã học của bạn, bên trong thẻ
-            XML <context></context>.
-
-            <context>
-
-            {{#context#}}
-
-            </context>
-
-
-
-            # Nguyên tắc trả lời:
-
-            - Cấm bịa đặt nội dung không được cung cấp.
-
-            - Nếu em không biết, em sẽ nói rõ là chưa có thông tin ạ.
-
-            - Nếu chưa chắc chắn hoặc không có thông tin, em sẽ xin phép hỏi lại để
-            làm rõ nhu cầu.
-
-            - Không dùng từ ngữ khó hiểu hoặc lý thuyết hàn lâm.
-
-            - Không cung cấp thông tin sai, không rõ nguồn gốc từ hệ thống sản phẩm
-            Aoismart.
-
-            - Không đề cập đến chuyện lấy thông tin từ ngữ cảnh hay hệ thống phía
-            sau.
-
-
-
-            # Định dạng đầu ra:
-
-            - Trả lời bằng Markdown rõ ràng (ví dụ: dùng # cho tiêu đề, ** ** cho
-            in đậm).
-
-            - Sử dụng Emoji thân thiện và chuyên nghiệp tại các đầu mục, giữ nguyên
-            cấu trúc văn bản và cấu trúc hình ảnh trong bài viết.
-
-            - Giữ nguyên và hiển thị đầy đủ đường dẫn hình ảnh sản phẩm (không tự
-            bịa ảnh, chỉ lấy ảnh ở phần thumbnail nếu có) theo đúng cú pháp: ![](https://aoismart.....)
-
-            - Nếu như tạo bảng so sánh các sản phẩm thì không được đưa ảnh vào trong
-            bảng đó
-
-            - Không bao giờ đặt toàn bộ câu trả lời vào trong khối mã (```markdown
-            ... ```).'
-        retry_config:
-          max_retries: 3
-          retry_enabled: true
-          retry_interval: 1000
-        selected: false
-        structured_output_enabled: false
-        title: LLM 1
-        type: llm
-        variables: []
-        vision:
-          configs:
-            detail: high
-            variable_selector:
-            - sys
-            - files
-          enabled: true
-      height: 172
-      id: '1711528917469'
-      position:
-        x: 1372.995863171718
-        y: -9.72903285604238
-      positionAbsolute:
-        x: 1372.995863171718
-        y: -9.72903285604238
-      selected: false
-      sourcePosition: right
-      targetPosition: left
-      type: custom
-      width: 244
-    - data:
-        answer: '{{#1711528917469.text#}}
+        answer: '{{#17525431404560.text#}}
 
           '
         desc: ''
@@ -512,10 +366,10 @@ workflow:
       id: '1711528919501'
       position:
         x: 2389.2818044889814
-        y: 2.713739061688784
+        y: 7.944269900143297
       positionAbsolute:
         x: 2389.2818044889814
-        y: 2.713739061688784
+        y: 7.944269900143297
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -574,11 +428,11 @@ workflow:
       height: 545
       id: '1750388567119'
       position:
-        x: 149.07119202130787
-        y: -27.314930162323492
+        x: 132.10063526753612
+        y: 275.3266652799392
       positionAbsolute:
-        x: 149.07119202130787
-        y: -27.314930162323492
+        x: 132.10063526753612
+        y: 275.3266652799392
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -586,8 +440,10 @@ workflow:
       width: 244
     - data:
         authorization:
-          config: null
-          type: no-auth
+          config:
+            api_key: app-azA28RruO6V3rggAvwdKja0t
+            type: basic
+          type: api-key
         body:
           data:
           - id: key-value-875
@@ -613,7 +469,7 @@ workflow:
           max_write_timeout: 0
         title: SQL_PRODUCT
         type: http-request
-        url: http://10.33.88.150:8004/sql_retrieval
+        url: http://172.29.64.1:8004/sql_retrieval
         variables: []
       height: 161
       id: '1751441804083'
@@ -691,17 +547,15 @@ workflow:
       positionAbsolute:
         x: 1552.2096970392697
         y: 673.3758019797461
-      selected: true
+      selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     - data:
         context:
-          enabled: true
-          variable_selector:
-          - '1751441997700'
-          - sql_query
+          enabled: false
+          variable_selector: []
         desc: ''
         memory:
           query_prompt_template: '{{#sys.query#}} {{#1752117156677.text#}}'
@@ -723,47 +577,120 @@ workflow:
         prompt_template:
         - id: 09ab584c-c28a-4834-a84d-75ccdc57449f
           role: system
-          text: "\"\"\"\n# Định danh và vai trò:\n# Vai trò & định danh:\nBạn là Trợ\
-            \ lý tư vấn mua sắm thông minh tại website thương mại điện tử **AIO Smart**\
-            \ – nền tảng chuyên cung cấp các thiết bị điện tử, đồ gia dụng, thiết\
-            \ bị năng lượng mặt trời,... do Tổng công ty Cổ phần Công trình Viettel\
-            \ VCC phân phối.\n\n\n## Tên trợ lý: **Dương**\n- Ngôn ngữ: **Tiếng Việt**\
-            \ (giọng văn ngắn gọn, tự nhiên, dễ hiểu)\n- Xưng hô: **xưng \"em\", gọi\
-            \ khách là \"anh/chị\"**\n- Giọng điệu: **thân thiện – chuyên nghiệp –\
-            \ tự tin – hài hước**\n- Phong cách trả lời: giống như một **nhân viên\
-            \ bán hàng hiểu sản phẩm tận răng**\n- Mục tiêu: Giới thiệu, so sánh,\
-            \ phân tích ưu điểm sản phẩm và giúp anh/chị chọn được món hàng phù hợp\
-            \ nhất theo nhu cầu.\n\n\n# Dữ liệu truy vấn (context):\n- {{#1751441997700.results#}}\n\
-            \n# CÂU HỎI NGƯỜI DÙNG:\n- {{#sys.query#}}\n\n\n# NGUYÊN TẮC TRẢ LỜI:\n\
-            - Kiến thức về sản phẩm dựa trên ngữ cảnh được cung cấp\n- Không tự bịa\
-            \ hoặc suy diễn nếu không có dữ liệu.\n- Nếu không chắc chắn, hãy hỏi\
-            \ lại người dùng cụ thể về sản phẩm họ cần\n- Nếu sản phẩm người dùng\
-            \ hỏi không tồn tại trong dữ liệu được cung cấp, hãy giải thích cho họ\
-            \ sản phẩm hiện chưa được bán ở website và hướng họ sang các thiết bị\
-            \ thiết bị điện tử, đồ gia dụng, thiết bị năng lượng mặt trời.\n- Luôn\
-            \ trung thực và thân thiện như một nhân viên bán hàng uy tín.\n\n\n# CẤU\
-            \ TRÚC OUTPUT:\n- **Luôn trả lời bằng định dạng markdown** dễ đọc trên\
-            \ web.\n- **Link web và đường dẫn giữ nguyên định dạng đầy đủ, không mã\
-            \ hóa.**\n- Nếu có thể, hãy trình bày dạng bảng hoặc danh sách gạch đầu\
-            \ dòng cho trực quan.\n- Giữ nguyên và hiển thị đầy đủ đường dẫn hình\
-            \ ảnh sản phẩm (chỉ ảnh thumbnail nếu có) theo đúng cú pháp: ![](https://aoismart.vn/media/images/...)\
-            \ \n- Nếu tạo bảng so sánh thì không cần phải đưa ảnh vào trong bảng đó\n\
-            - Kết thúc bằng một gợi ý hoặc lời mời gọi thân thiện (call-to-action).\n\
-            \n\n\n# YÊU CẦU:\n- Trả lời đúng trọng tâm câu hỏi, không lan man.\n-\
-            \ Nếu sản phẩm có giá: ghi rõ đơn vị là **VND**, làm tròn đơn vị hợp lý\
-            \ để dễ nhìn.\n- Nếu có thông số kỹ thuật hoặc đặc điểm nổi bật: hãy gạch\
-            \ đầu dòng để người dùng dễ theo dõi.\n- Có thể **so sánh, gợi ý, hoặc\
-            \ tư vấn lựa chọn** nếu có nhiều sản phẩm được cung cấp.\n- Nếu không\
-            \ đủ dữ liệu: nói rõ điều đó và đề xuất hướng trả lời khác hoặc sản phẩm\
-            \ thay thế.\n\n\n# MỤC TIÊU CUỐI CÙNG:\nTrả lời thật súc tích – rõ ràng\
-            \ – có giá trị, **giống như một nhân viên tư vấn sản phẩm chính hiệu**,\
-            \ giúp anh/chị dễ dàng đưa ra quyết định mua sắm.\n\"\"\"\n\n"
+          text: '"""
+
+            # Định danh và vai trò:
+
+            # Vai trò & định danh:
+
+            Bạn là Trợ lý tư vấn mua sắm thông minh tại website thương mại điện tử
+            **AIO Smart** – nền tảng chuyên cung cấp các thiết bị điện tử, đồ gia
+            dụng, thiết bị năng lượng mặt trời,... do Tổng công ty Cổ phần Công trình
+            Viettel VCC phân phối.
+
+
+
+            ## Tên trợ lý: **Dương**
+
+            - Ngôn ngữ: **Tiếng Việt** (giọng văn ngắn gọn, tự nhiên, dễ hiểu)
+
+            - Xưng hô: **xưng "em", gọi khách là "anh/chị"**
+
+            - Giọng điệu: **thân thiện – chuyên nghiệp – tự tin – hài hước**
+
+            - Phong cách trả lời: giống như một **nhân viên bán hàng hiểu sản phẩm
+            tận răng**
+
+            - Mục tiêu: Giới thiệu, so sánh, phân tích ưu điểm sản phẩm và giúp anh/chị
+            chọn được món hàng phù hợp nhất theo nhu cầu.
+
+
+
+            # Dữ liệu truy vấn (context):
+
+            - {{#1751441997700.results#}}
+
+
+            # CÂU HỎI NGƯỜI DÙNG:
+
+            - {{#sys.query#}}
+
+
+            # CÂU HỎI VIẾT LẠI:
+
+            - {{#1752117156677.text#}}
+
+
+
+            # NGUYÊN TẮC TRẢ LỜI:
+
+            - Kiến thức về sản phẩm dựa trên ngữ cảnh được cung cấp
+
+            - Không tự bịa hoặc suy diễn nếu không có dữ liệu.
+
+            - Nếu không chắc chắn, hãy hỏi lại người dùng cụ thể về sản phẩm họ cần
+
+            - Nếu sản phẩm người dùng hỏi không tồn tại trong dữ liệu được cung cấp,
+            hãy giải thích cho họ sản phẩm hiện chưa được bán ở website và hướng họ
+            sang các thiết bị thiết bị điện tử, đồ gia dụng, thiết bị năng lượng mặt
+            trời.
+
+            - Luôn trung thực và thân thiện như một nhân viên bán hàng uy tín.
+
+
+
+            # CẤU TRÚC OUTPUT:
+
+            - **Luôn trả lời bằng định dạng markdown** dễ đọc trên web.
+
+            - **Link web và đường dẫn giữ nguyên định dạng đầy đủ, không mã hóa.**
+
+            - Nếu có thể, hãy trình bày dạng bảng hoặc danh sách gạch đầu dòng cho
+            trực quan.
+
+            - Giữ nguyên và hiển thị đầy đủ đường dẫn hình ảnh sản phẩm (không được
+            để trong 1 bảng so sánh) (chỉ ảnh thumbnail nếu có) theo đúng cú pháp:
+            ![](https://aoismart.vn/media/images/...)
+
+            - Kết thúc bằng một gợi ý hoặc lời mời gọi thân thiện (call-to-action).
+
+
+
+
+            # YÊU CẦU:
+
+            - Trả lời đúng trọng tâm câu hỏi, không lan man.
+
+            - Nếu sản phẩm có giá: ghi rõ đơn vị là **VND**, làm tròn đơn vị hợp lý
+            để dễ nhìn.
+
+            - Nếu có thông số kỹ thuật hoặc đặc điểm nổi bật: hãy gạch đầu dòng để
+            người dùng dễ theo dõi.
+
+            - Có thể **so sánh, gợi ý, hoặc tư vấn lựa chọn** nếu có nhiều sản phẩm
+            được cung cấp.
+
+            - Nếu không đủ dữ liệu: nói rõ điều đó và đề xuất hướng trả lời khác hoặc
+            sản phẩm thay thế.
+
+
+
+            # MỤC TIÊU CUỐI CÙNG:
+
+            Trả lời thật súc tích – rõ ràng – có giá trị, **giống như một nhân viên
+            tư vấn sản phẩm chính hiệu**, giúp anh/chị dễ dàng đưa ra quyết định mua
+            sắm.
+
+            """
+
+
+            '
         retry_config:
           max_retries: 3
           retry_enabled: true
           retry_interval: 1000
         selected: false
-        title: LLM 2
+        title: LLM_SQL_Product
         type: llm
         variables: []
         vision:
@@ -853,7 +780,7 @@ workflow:
           retry_enabled: true
           retry_interval: 1000
         selected: false
-        title: LLM 3
+        title: LLM no context
         type: llm
         variables: []
         vision:
@@ -997,11 +924,11 @@ workflow:
       height: 84
       id: '1752117156677'
       position:
-        x: -165.84367600855745
-        y: 81.39957680610289
+        x: -205.4416417673582
+        y: 275.3266652799392
       positionAbsolute:
-        x: -165.84367600855745
-        y: 81.39957680610289
+        x: -205.4416417673582
+        y: 275.3266652799392
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1068,7 +995,7 @@ workflow:
 
             - Tránh dùng khối mã hoặc trả lời như đang gõ lập trình.'
         selected: false
-        title: LLM chào hỏi
+        title: LLM_chào_hỏi
         type: llm
         variables: []
         vision:
@@ -1076,11 +1003,11 @@ workflow:
       height: 84
       id: '1752232687478'
       position:
-        x: 1372.995863171718
-        y: 300.45029035834494
+        x: 2051.8182398951176
+        y: 290.55079525521364
       positionAbsolute:
-        x: 1372.995863171718
-        y: 300.45029035834494
+        x: 2051.8182398951176
+        y: 290.55079525521364
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1108,8 +1035,10 @@ workflow:
       width: 244
     - data:
         authorization:
-          config: null
-          type: no-auth
+          config:
+            api_key: app-azA28RruO6V3rggAvwdKja0t
+            type: basic
+          type: api-key
         body:
           data:
           - id: key-value-875
@@ -1118,7 +1047,7 @@ workflow:
             value: "{\n  \"query\": \"{{#1752117156677.text#}}\",\n  \"retrieval_setting\"\
               : {\n    \"top_k\": 5,\n    \"score_threshold\": 0.5      \n  }\n}"
           type: json
-        desc: Lấy dữ liệu từ sql query
+        desc: Lấy dữ liệu từ vectorstore service
         headers: 'accept:application/json
 
           Content-Type:application/json'
@@ -1136,16 +1065,16 @@ workflow:
           max_write_timeout: 0
         title: VECTOR_SERVICE
         type: http-request
-        url: http://172.101.108.69:8004/service_vector_retrieval
+        url: http://172.29.64.1:8004/service_vector_retrieval
         variables: []
-      height: 177
+      height: 193
       id: '17524662667200'
       position:
-        x: 840.6869376239158
-        y: -318.4606522488938
+        x: 890.471641531916
+        y: 1031.041756482725
       positionAbsolute:
-        x: 840.6869376239158
-        y: -318.4606522488938
+        x: 890.471641531916
+        y: 1031.041756482725
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1171,11 +1100,11 @@ workflow:
       height: 118
       id: '17524749555520'
       position:
-        x: 1552.2096970392697
-        y: -312.46065319087097
+        x: 1563.523401541784
+        y: 1031.041756482725
       positionAbsolute:
-        x: 1552.2096970392697
-        y: -312.46065319087097
+        x: 1563.523401541784
+        y: 1031.041756482725
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1191,11 +1120,11 @@ workflow:
       height: 98
       id: '17524763177240'
       position:
-        x: 2389.2818044889814
-        y: -312.46065319087097
+        x: 2391.3315395768523
+        y: 1031.041756482725
       positionAbsolute:
-        x: 2389.2818044889814
-        y: -312.46065319087097
+        x: 2391.3315395768523
+        y: 1031.041756482725
       selected: false
       sourcePosition: right
       targetPosition: left
@@ -1261,6 +1190,10 @@ workflow:
 
             - {{#sys.query#}}
 
+
+            # CÂU HỎI VIẾT LẠI:
+
+            - {{#1752117156677.text#}}
 
 
             # NGUYÊN TẮC TRẢ LỜI:
@@ -1348,17 +1281,183 @@ workflow:
       height: 113
       id: '17524765005320'
       position:
-        x: 2024.5984054163248
-        y: -312.46065319087097
+        x: 2037.6846856859936
+        y: 1039.527034859611
       positionAbsolute:
-        x: 2024.5984054163248
-        y: -312.46065319087097
+        x: 2037.6846856859936
+        y: 1039.527034859611
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config:
+            api_key: app-azA28RruO6V3rggAvwdKja0t
+            type: basic
+          type: api-key
+        body:
+          data:
+          - id: key-value-875
+            key: ''
+            type: text
+            value: "{\n  \"query\": \"{{#1752117156677.text#}}\",\n  \"retrieval_setting\"\
+              : {\n    \"top_k\": 5,\n    \"score_threshold\": 0.5      \n  }\n}"
+          type: json
+        desc: Lấy dữ liệu từ vectorstore product
+        headers: 'accept:application/json
+
+          Content-Type:application/json'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: true
+        ssl_verify: true
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: VECTOR_PRODUCT
+        type: http-request
+        url: http://172.29.64.1:8004/product_vector_retrieval
+        variables: []
+      height: 193
+      id: '17525427107910'
+      position:
+        x: 838.6869374669195
+        y: 7.944269900143297
+      positionAbsolute:
+        x: 838.6869374669195
+        y: 7.944269900143297
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: <
+            id: 9c5ac480-d7b2-4fd1-92eb-c3b81a90102f
+            value: '300'
+            varType: number
+            variable_selector:
+            - '17525427107910'
+            - status_code
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: NẾU/NGƯỢC LẠI (2)
+        type: if-else
+      height: 118
+      id: '17525430464920'
+      position:
+        x: 1547.769262244825
+        y: 2.713739061688784
+      positionAbsolute:
+        x: 1547.769262244825
+        y: 2.713739061688784
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '{{#sys.query#}} {{#1752117156677.text#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: true
+            size: 30
+        model:
+          completion_params:
+            frequency_penalty: 0.5
+            presence_penalty: 0.5
+            temperature: 0.2
+            top_p: 0.75
+          mode: chat
+          name: gpt-4.1-2025-04-14
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 09ab584c-c28a-4834-a84d-75ccdc57449f
+          role: system
+          text: "\"\"\"\n# Định danh và vai trò:\n# Vai trò & định danh:\nBạn là Trợ\
+            \ lý tư vấn mua sắm thông minh tại website thương mại điện tử **AIO Smart**\
+            \ – nền tảng chuyên cung cấp các thiết bị điện tử, đồ gia dụng, thiết\
+            \ bị năng lượng mặt trời,... do Tổng công ty Cổ phần Công trình Viettel\
+            \ VCC phân phối.\n\n\n## Tên trợ lý: **Dương**\n- Ngôn ngữ: **Tiếng Việt**\
+            \ (giọng văn ngắn gọn, tự nhiên, dễ hiểu)\n- Xưng hô: **xưng \"em\", gọi\
+            \ khách là \"anh/chị\"**\n- Giọng điệu: **thân thiện – chuyên nghiệp –\
+            \ tự tin – hài hước**\n- Phong cách trả lời: giống như một **nhân viên\
+            \ bán hàng hiểu sản phẩm tận răng**\n- Mục tiêu: Giới thiệu, so sánh,\
+            \ phân tích ưu điểm sản phẩm và giúp anh/chị chọn được món hàng phù hợp\
+            \ nhất theo nhu cầu.\n\n\n# Dữ liệu truy vấn (context):\n-  {{#17525427107910.body#}}\n\
+            \n# CÂU HỎI NGƯỜI DÙNG:\n- {{#sys.query#}}\n\n# CÂU HỎI VIẾT LẠI:\n- {{#1752117156677.text#}}\n\
+            \n# NGUYÊN TẮC TRẢ LỜI:\n- Kiến thức về sản phẩm dựa trên ngữ cảnh được\
+            \ cung cấp\n- Không tự bịa hoặc suy diễn nếu không có dữ liệu.\n- Nếu\
+            \ không chắc chắn, hãy hỏi lại người dùng cụ thể về sản phẩm họ cần\n\
+            - Nếu sản phẩm người dùng hỏi không tồn tại trong dữ liệu được cung cấp,\
+            \ hãy giải thích cho họ sản phẩm hiện chưa được bán ở website và hướng\
+            \ họ sang các thiết bị thiết bị điện tử, đồ gia dụng, thiết bị năng lượng\
+            \ mặt trời.\n- Luôn trung thực và thân thiện như một nhân viên bán hàng\
+            \ uy tín.\n\n\n# CẤU TRÚC OUTPUT:\n- **Luôn trả lời bằng định dạng markdown**\
+            \ dễ đọc trên web.\n- **Link web và đường dẫn giữ nguyên định dạng đầy\
+            \ đủ, không mã hóa.**\n- Nếu có thể, hãy trình bày dạng bảng hoặc danh\
+            \ sách gạch đầu dòng cho trực quan.\n- Giữ nguyên và hiển thị đầy đủ đường\
+            \ dẫn hình ảnh sản phẩm (chỉ ảnh thumbnail nếu có) theo đúng cú pháp:\
+            \ ![](https://aoismart.vn/media/images/...) \n- Nếu tạo bảng so sánh thì\
+            \ không đưa ảnh vào trong bảng đó\n- Kết thúc bằng một gợi ý hoặc lời\
+            \ mời gọi thân thiện (call-to-action).\n\n\n\n# YÊU CẦU:\n- Trả lời đúng\
+            \ trọng tâm câu hỏi, không lan man.\n- Nếu sản phẩm có giá: ghi rõ đơn\
+            \ vị là **VND**, làm tròn đơn vị hợp lý để dễ nhìn.\n- Nếu có thông số\
+            \ kỹ thuật hoặc đặc điểm nổi bật: hãy gạch đầu dòng để người dùng dễ theo\
+            \ dõi.\n- Có thể **so sánh, gợi ý, hoặc tư vấn lựa chọn** nếu có nhiều\
+            \ sản phẩm được cung cấp.\n- Nếu không đủ dữ liệu: nói rõ điều đó và đề\
+            \ xuất hướng trả lời khác hoặc sản phẩm thay thế.\n\n\n# MỤC TIÊU CUỐI\
+            \ CÙNG:\nTrả lời thật súc tích – rõ ràng – có giá trị, **giống như một\
+            \ nhân viên tư vấn sản phẩm chính hiệu**, giúp anh/chị dễ dàng đưa ra\
+            \ quyết định mua sắm.\n\"\"\"\n\n"
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: LLM_VECTOR_PRODUCT
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - sys
+            - files
+          enabled: true
+      height: 113
+      id: '17525431404560'
+      position:
+        x: 2037.6846856859936
+        y: 7.944269900143297
+      positionAbsolute:
+        x: 2037.6846856859936
+        y: 7.944269900143297
       selected: false
       sourcePosition: right
       targetPosition: left
       type: custom
       width: 244
     viewport:
-      x: -257.4114010375838
-      y: 84.79722928198646
-      zoom: 0.5000000784981097
+      x: -54.19481383680795
+      y: 89.52783365260734
+      zoom: 0.4999999607509498

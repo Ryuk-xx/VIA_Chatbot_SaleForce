@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Header, HTTPException, Response
+from fastapi import FastAPI, Header, HTTPException, Response, Depends
 from pydantic import BaseModel
 from typing import Optional, List, Dict, Any
 
@@ -13,6 +13,11 @@ from configs.config import load_config
 from configs.logging_config import setup_logging
 from langchain_openai import OpenAIEmbeddings
 from elasticsearch import Elasticsearch
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+DIFY_API_KEY = os.getenv("DIFY_API_KEY")
 
 logger = setup_logging("Chatbot_SaleForce")
 
@@ -88,135 +93,93 @@ class SQLRetrievalResponse(BaseModel):
 
 app = FastAPI(title="Retrieval API")
 
-def verify_api_key(authorization: str = Header(None)) -> bool:
-    """Verify the API key from Authorization header"""
-    if not authorization:
-        return False
-    try:
-        scheme, token = authorization.split()
-        if scheme.lower() != "bearer":
-            return False
-        return len(token) > 0
-    except ValueError:
-        return False
+def verify_api_key(authorization: str = Header(...)):
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing Bearer token")
+
+    token = authorization.split(" ")[1]
+    if token != DIFY_API_KEY:
+        raise HTTPException(status_code=403, detail="Invalid API Key")
+
+    return True
     
+    
+@app.get("/secure")
+def secure_endpoint(_: bool = Depends(verify_api_key)):
+    return {"message": "✅ Access granted"}
+
+def filter_results_by_threshold(results: list, threshold: Optional[float] = None):
+    if threshold is None:
+        return results
+    return [(doc, score) for doc, score in results if score >= threshold]
+
+def convert_to_retrieval_records(filtered_results: list) -> list:
+    records = []
+    for doc, score in filtered_results:
+        content = doc.page_content
+        try:
+            parsed_content = json.loads(content)
+            title = parsed_content.get("name", "Chưa rõ tên")
+        except Exception:
+            title = "Chưa rõ tên"
+        record = RetrievalRecord(
+            content=content,
+            score=score,
+            title=title,
+            metadata={}
+        )
+        records.append(record)
+    return records
+
 @app.post("/service_vector_retrieval", response_model=RetrievalResponse)
-async def retrieval_endpoint(request: RetrievalRequest,
-                             authorization: Optional[str] = Header(None)):
-    
-    # if not verify_api_key(authorization):
-    #     raise HTTPException(status_code=401, detail="Invalid or missing API key")
-    
-    # Check if retriever is initialized
+async def service_vector_retrieval(request: RetrievalRequest,
+                                   _: str = Depends(verify_api_key)):
     if milvus_service_vector_retriever is None:
         logger.info("Lỗi: chưa khởi tạo service vectorstore retrieval")
         raise HTTPException(status_code=500, detail="Vector store not initialized")
-    
+
     try:
-        # Perform retrieval
         results = milvus_service_vector_retriever.retrieve(
             query=request.query, 
             top_k=request.retrieval_setting.top_k
         )
-        logger.info("============== VECTOR SEARCH RETRIEVAL PROCESS ==============")
-        # Filter results by score threshold
-        filtered_results = []
-        if request.retrieval_setting.score_threshold:
-            filtered_results = [
-                (doc, score) for doc, score in results 
-                if score >= request.retrieval_setting.score_threshold
-            ]
-        else: 
-            filtered_results = [
-                (doc, score) for doc, score in results 
-            ]
-        
-        # Convert results to response format
-        records = []
-        for doc, score in filtered_results:
-            content = doc.page_content
-            
-            parsed_content = json.loads(doc.page_content)
-            title = parsed_content.get("name", "Chưa rõ tên")
-            
-            record = RetrievalRecord(
-                content=content,
-                score=score,
-                title=title,  
-                metadata={}  
-            )
+        logger.info("============== SERVICE VECTOR SEARCH RETRIEVAL PROCESS ==============")
 
-            records.append(record)
+        filtered_results = filter_results_by_threshold(results, request.retrieval_setting.score_threshold)
+        records = convert_to_retrieval_records(filtered_results)
+        
         return RetrievalResponse(records=records)
         
     except Exception as e:
         logger.info(f'Retrieval error: {str(e)}')
         raise HTTPException(status_code=500, detail=f"Retrieval error: {str(e)}")
 
-@app.post("/retrieval", response_model=RetrievalResponse)
-async def retrieval_endpoint(
-    request: RetrievalRequest,
-    authorization: Optional[str] = Header(None)
-):
-    """
-    Retrieval API endpoint that searches for documents based on query
-    """
-
-    # Verify API key
-    if not verify_api_key(authorization):
-        raise HTTPException(status_code=401, detail="Invalid or missing API key")
-    
-    # Check if retriever is initialized
+@app.post("/product_vector_retrieval", response_model=RetrievalResponse)
+async def product_vector_retrieval(request: RetrievalRequest,
+                                   _: str = Depends(verify_api_key)):
     if milvus_product_vector_retriever is None:
-        logger.info("Lỗi: chưa khởi tạo vector store retrieval")
+        logger.info("Lỗi: chưa khởi tạo product vectorstore retrieval")
         raise HTTPException(status_code=500, detail="Vector store not initialized")
     
     try:
-        # Perform retrieval
         results = milvus_product_vector_retriever.retrieve(
             query=request.query, 
             top_k=request.retrieval_setting.top_k
         )
-        logger.info("============== VECTOR SEARCH RETRIEVAL PROCESS ==============")
-        # Filter results by score threshold
-        filtered_results = []
-        if request.retrieval_setting.score_threshold:
-            filtered_results = [
-                (doc, score) for doc, score in results 
-                if score >= request.retrieval_setting.score_threshold
-            ]
-        else: 
-            filtered_results = [
-                (doc, score) for doc, score in results 
-            ]
-        
-        # Convert results to response format
-        records = []
-        for doc, score in filtered_results:
-            content = doc.page_content
-            
-            parsed_content = json.loads(doc.page_content)
-            title = parsed_content.get("name", "Chưa rõ tên")
-            
-            record = RetrievalRecord(
-                content=content,
-                score=score,
-                title=title,  
-                metadata={}  
-            )
+        logger.info("============== PRODUCT VECTOR SEARCH RETRIEVAL PROCESS ==============")
 
-            records.append(record)
+        filtered_results = filter_results_by_threshold(results, request.retrieval_setting.score_threshold)
+        records = convert_to_retrieval_records(filtered_results)
+        
         return RetrievalResponse(records=records)
         
     except Exception as e:
         logger.info(f'Retrieval error: {str(e)}')
         raise HTTPException(status_code=500, detail=f"Retrieval error: {str(e)}")
-    
-    
 
     
 @app.post("/sql_retrieval", response_model=SQLRetrievalResponse)
-async def retrieval_endpoint(request: SqlRetrievalRequest):
+async def sql_retrieval(request: SqlRetrievalRequest):
     try:
         search_result = await elastic_sql_retriever.search(request.query)
         
@@ -230,15 +193,6 @@ async def retrieval_endpoint(request: SqlRetrievalRequest):
         logger.info(f'Retrieval error: {str(e)}')
         raise HTTPException(status_code=500, detail=f"Retrieval error: {str(e)}")
 
-
-
-# @app.get("/health")
-# async def health_check():
-#     """Health check endpoint"""
-#     return {
-#         "status": "healthy",
-#         "vector_store_initialized": retriever is not None
-#     }
 
 if __name__ == "__main__":
     import uvicorn

@@ -21,14 +21,16 @@ class MilvusVectorStore:
             token="root:Milvus"
         )
 
-        schema = MilvusClient.create_schema(auto_id=True)  
+        schema = MilvusClient.create_schema(auto_id=False)  # <- Tắt auto_id vì ta muốn tự set sku làm ID
 
         schema.add_field(
-            field_name="id",
-            datatype=DataType.INT64,
-            is_primary=True,    
-            description="auto id"
+            field_name="pk",
+            datatype=DataType.VARCHAR,
+            is_primary=True,
+            max_length=128,
+            description="id service hoặc sku product"
         )
+
 
         schema.add_field(
             field_name="text",
@@ -89,12 +91,11 @@ class MilvusVectorStore:
             self.logger.info(f"Collection {self.collection_name} created.")
             
         vector_store = Milvus(
-            auto_id=True,
+            auto_id=False,
             embedding_function=self.embeddings,
             builtin_function= BM25BuiltInFunction(),
             vector_field = ["dense", "sparse"],
             connection_args={"uri": self.uri,},
-            # index_params= {"index_type": "AUTOINDEX", "metric_type": "COSINE"},
             collection_name = self.collection_name
         )
         
@@ -103,96 +104,109 @@ class MilvusVectorStore:
     
     def add_documents(self, documents):
         try:
-            self.vectorstore.add_documents(documents)
-            self.logger.info(f"Added {len(documents)} documents to the vector store: {self.collection_name}.")
+            texts = [doc.page_content for doc in documents]
+            metadatas = [doc.metadata for doc in documents]
+            ids = [doc.metadata["pk"] for doc in documents]  
+            self.vectorstore.add_texts(texts, metadatas=metadatas, ids=ids)
+            
+            self.logger.info(f"✅ Thêm {len(documents)} documents vào vectorstore: {self.collection_name}")
         except Exception as e:
-            self.logger.error(f"Error adding documents to vector store: {e}")
+            self.logger.error(f"❌ Lỗi khi thêm documents: {e}")
         
+    def delete_by_id(self, id):
+        try:
+            self.vectorstore.delete(ids=[id])
 
-    
+            self.logger.info(f"✅ Đã xóa document với id = {id} khỏi collection {self.collection_name}")
+        except Exception as e:
+            self.logger.error(f"❌ Lỗi khi xóa id = {id}: {e}")
+                
 
-# if __name__ == "__main__":
-#     import pandas as pd
-#     from source.utils.convert_df_to_document import convert_df_to_document
-#     from langchain_core.documents import Document
-#     from configs.config import load_config
-#     from configs.logging_config import setup_logging
+if __name__ == "__main__":
+    import pandas as pd
+    from source.utils.convert_df_to_document import convert_df_to_document
+    from langchain_core.documents import Document
+    from configs.config import load_config
+    from configs.logging_config import setup_logging
     
-#     logger = setup_logging("Chatbot_SaleForce")
+    logger = setup_logging("Chatbot_SaleForce")
     
-#     config = load_config()
-#     milvus_uri = config["milvus"]["milvus_uri"]
-#     milvus_embedding_dimension = config["milvus"]["embedding_dimension"]
-#     embedding_model_name = config["milvus"]["embedding_model"]
+    config = load_config()
+    milvus_uri = config["milvus"]["milvus_uri"]
+    milvus_embedding_dimension = config["milvus"]["embedding_dimension"]
+    embedding_model_name = config["milvus"]["embedding_model"]
     
-#     openai_key = config["llm"]["openai_api_key"]
+    openai_key = config["llm"]["openai_api_key"]
     
-#     milvus_embedding_model = OpenAIEmbeddings(
-#                             openai_api_key=openai_key,
-#                             model=embedding_model_name,
-#                             dimensions=milvus_embedding_dimension,
-#                         )
-   
-    
-#     service_path = config["path"]["service_path"]
-#     product_path = config["path"]["product_path"]
-#     product_df = pd.read_csv(product_path, encoding="utf-8")
-#     service_df = pd.read_csv(service_path, encoding="utf-8")
+    milvus_embedding_model = OpenAIEmbeddings(
+                            openai_api_key=openai_key,
+                            model=embedding_model_name,
+                            dimensions=milvus_embedding_dimension,
+                        )
+       
+    import json
+    with open("data/products.json", "r", encoding="utf-8") as f:
+        raw_product_documents = json.load(f)
 
+    with open("data/services.json", "r", encoding="utf-8") as f:
+        raw_service_documents = json.load(f)
+        
+    product_documents = [
+        Document(
+            page_content=json.dumps(item, ensure_ascii=False),
+            metadata={"pk": item.get("sku", "")}
+        )
+        for item in raw_product_documents
+    ]
 
-#     converter = convert_df_to_document()
-
-
-#     product_documents = converter.convert(product_df, 
-#                                         html_columns=["description", "salient_features", "short_description"], 
-#                                         json_columns=["services", "attributes"], 
-#                                         list_columns=['images', 'category_id'])
-#     service_documents = converter.convert(service_df, 
-#                                         html_columns=['description'], 
-#                                         json_columns=[], 
-#                                         list_columns=[])
+    service_documents = [
+        Document(
+            page_content=json.dumps(item, ensure_ascii=False),
+            metadata={"pk": item.get("id", "")}
+        )
+        for item in raw_service_documents
+    ]
     
-#     product_documents = [Document(page_content=text) for text in product_documents]
-#     service_documents = [Document(page_content=text) for text in service_documents]
+    product_vectorstore = MilvusVectorStore(
+        milvus_uri=milvus_uri,
+        collection_name="SaleForce_product_vectorstore",
+        embeddings=milvus_embedding_model,
+        dimensions=milvus_embedding_dimension,
+        openai_key=openai_key,
+        recreate_collection=False,
+        logger=logger,
+    )
     
-#     product_vectorstore = MilvusVectorStore(
-#         milvus_uri=milvus_uri,
-#         collection_name=config["milvus"]["product_collection_name"],
-#         embeddings=milvus_embedding_model,
-#         dimensions=milvus_embedding_dimension,
-#         openai_key=openai_key,
-#         recreate_collection=True,
-#         logger=logger,
-#     )
+    service_vectorstore = MilvusVectorStore(       
+        milvus_uri=milvus_uri,
+        collection_name="SaleForce_service_vectorstore",
+        embeddings=milvus_embedding_model,
+        dimensions=milvus_embedding_dimension,
+        openai_key=openai_key,
+        recreate_collection=False,  
+        logger=logger,
+    )   
     
-#     service_vectorstore = MilvusVectorStore(       
-#         milvus_uri=milvus_uri,
-#         collection_name=config["milvus"]["service_collection_name"],
-#         embeddings=milvus_embedding_model,
-#         dimensions=milvus_embedding_dimension,
-#         openai_key=openai_key,
-#         recreate_collection=True,  
-#         logger=logger,
-#     )   
-    
-
-
-#     def chunk_documents(documents, batch_size=100):
-#         for i in range(0, len(documents), batch_size):
-#             yield documents[i:i+batch_size]
-
-#     for chunk in chunk_documents(product_documents, batch_size=50):
-#         try:
-#             product_vectorstore.add_documents(chunk)
-#         except Exception as e:
-#             logger.error(f"Error adding chunk: {e}")
+    # product_vectorstore.delete_by_id("04100100031")
     
     
-#     for chunk in chunk_documents(service_documents, batch_size=50):
-#         try:
-#             service_vectorstore.add_documents(chunk)
-#         except Exception as e:
-#             logger.error(f"Error adding chunk: {e}")
+    
+    # def chunk_documents(documents, batch_size=50):
+    #     for i in range(0, len(documents), batch_size):
+    #         yield documents[i:i+batch_size]
+
+    # for chunk in chunk_documents(product_documents, batch_size=50):
+    #     try:
+    #         product_vectorstore.add_documents(chunk)
+    #     except Exception as e:
+    #         logger.error(f"Error adding chunk: {e}")
+    
+    
+    # for chunk in chunk_documents(service_documents, batch_size=50):
+    #     try:
+    #         service_vectorstore.add_documents(chunk)
+    #     except Exception as e:
+    #         logger.error(f"Error adding chunk: {e}")
             
         
         

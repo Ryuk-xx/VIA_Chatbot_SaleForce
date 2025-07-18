@@ -7,18 +7,18 @@ from configs.config import load_config
 from configs.logging_config import setup_logging
 import json
 import asyncio
-
+import logging
 
 class Elastic_Indexing:
     def __init__(self, index_name: str, es: Elasticsearch, fields: list, llm: ChatOpenAI,recreate_index: bool = False, logger = None):
         self.create_extra_column_prompt = CREATE_EXTRA_COLUMN_PROMPT
-        self.recreate_index = recreate_index
         self.index_name = index_name
         self.es = es
         self.fields = fields
-        self.logger = logger    
+        self.logger = logger or logging.getLogger(__name__)   
         self.llm = llm
-        
+        if recreate_index or not self.es.indices.exists(index=self.index_name):
+            self.create_index()
     def create_extra_column_json(self, products) -> list:
         """
         Từ 1 list các file json thuộc tính của products, trích xuất ra các thuộc tính chung nhất (chỉ sử dụng cho products)
@@ -65,7 +65,7 @@ class Elastic_Indexing:
                 "properties": properties
             }
         }
-        if self.es.indices.exists(index=self.index_name) and self.recreate_index:
+        if self.es.indices.exists(index=self.index_name):
             self.es.indices.delete(index=self.index_name)
             
         self.es.indices.create(index=self.index_name, body=mapping)
@@ -106,7 +106,29 @@ class Elastic_Indexing:
                 error_detail = err["index"].get("error", {})
                 self.logger.error(f"Lỗi: {error_detail}")
   
-    
+    def delete_by_sku(self, sku: str) -> None:
+        """
+        Xóa tất cả documents trong index có trường 'sku' bằng giá trị đầu vào.
+        """
+        if not sku or not sku.strip():
+            self.logger.warning(f"⚠️ SKU đầu vào không hợp lệ: '{sku}' — Hủy thao tác xóa.")
+            return
+        
+        response = self.es.delete_by_query(
+            index=self.index_name,
+            body={
+                "query": {
+                    "term": {
+                         "sku": {
+                            "value": sku
+                        }
+                    }
+                }
+            },
+            refresh=True 
+        )
+        self.logger.info(f"Đã xóa {response.get("deleted", 0)} document(s) với SKU = {sku} trong index {self.index_name}.")
+
     
 if __name__ == "__main__":
     #setup
@@ -130,17 +152,21 @@ if __name__ == "__main__":
     with open("data/products.json", "r", encoding="utf-8") as f:
         product_documents = json.load(f)   
     
-    product_indexer = Elastic_Indexing("products", es, config["product_fields"], llm, recreate_index=False, logger=logger)
-    product_indexer.create_index()
+    product_indexer = Elastic_Indexing("test_products", es, config["product_fields"], llm, recreate_index=False, logger=logger)
     extra_col_product_documents = product_indexer.create_extra_column_json(product_documents)
     product_indexer.add_documents(extra_col_product_documents)
+
+    
+    
+    
+    product_indexer.delete_by_sku("ITCAM000072")
+    
     
 
     
-    # services
-    with open("data/services.json", "r", encoding="utf-8") as f:
-        service_documents = json.load(f)
+    # # services
+    # with open("data/services.json", "r", encoding="utf-8") as f:
+    #     service_documents = json.load(f)
         
-    service_indexer = Elastic_Indexing("services", es, config["service_fields"], llm, recreate_index=False, logger=logger)
-    service_indexer.create_index()
-    service_indexer.add_documents(service_documents)
+    # service_indexer = Elastic_Indexing("services", es, config["service_fields"], llm, recreate_index=False, logger=logger)
+    # service_indexer.add_documents(service_documents)
